@@ -1,0 +1,39 @@
+{
+  "name": "flippit",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www",
+    "dev": "nodemon ./bin/www",
+    "deploy": "bash scripts/deploy.sh"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "compression": "^1.7.3",
+    "cookie-parser": "~1.4.3",
+    "cors": "^2.8.4",
+    "debug": "~2.6.0",
+    "dotenv": "^6.0.0",
+    "error-delpinos": "^1.0.0",
+    "express": "^4.16.3",
+    "express-static-gzip": "^1.1.3",
+    "gmail-nodemailer-delpinos": "^1.0.1",
+    "joi": "^13.7.0",
+    "json2csv": "^4.2.1",
+    "jsonwebtoken": "^8.3.0",
+    "moment": "^2.22.2",
+    "mongodb-delpinos": "^1.0.2",
+    "mongoose": "^5.3.3",
+    "morgan": "^1.9.0",
+    "node-fetch": "^2.3.0",
+    "node-rsa": "^1.0.2",
+    "nodemailer": "^4.6.8",
+    "oauth2-server": "^3.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^5.6.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "nodemon": "^1.18.4"
+  }
+}

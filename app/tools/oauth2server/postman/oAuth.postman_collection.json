@@ -1,0 +1,566 @@
+{
+	"info": {
+		"_postman_id": "c731c28e-fbcc-45ad-857b-73011a375971",
+		"name": "oAuth",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Admin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "be53a036-2045-4b02-95dd-5624b9908820",
+						"exec": [
+							"const response = JSON.parse(responseBody);",
+							"pm.environment.set(\"admin_id\", response.data.admin._id);",
+							"pm.environment.set(\"adminUsername\", response.data.admin.username);",
+							"pm.environment.set(\"basic\", response.data.client.basic);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://{{host}}:{{port}}/oauth2/user/admin",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"oauth2",
+						"user",
+						"admin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "be53a036-2045-4b02-95dd-5624b9908820",
+						"exec": [
+							"const response = JSON.parse(responseBody);",
+							"pm.environment.set(\"user_id\", response.data._id);",
+							"pm.environment.set(\"username\", response.data.username);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "{{username}}",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "{{password}}",
+							"type": "text"
+						},
+						{
+							"key": "confirmPassword",
+							"value": "{{password}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{host}}:{{port}}/oauth2/user",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"oauth2",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Change Password",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "be53a036-2045-4b02-95dd-5624b9908820",
+						"exec": [
+							"const response = JSON.parse(responseBody);",
+							"pm.environment.set(\"user_id\", response.data._id);",
+							"pm.environment.set(\"username\", response.data.username);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "password",
+							"value": "manuel",
+							"type": "text"
+						},
+						{
+							"key": "confirmPassword",
+							"value": "manuel",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{host}}:{{port}}/oauth2/password",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"oauth2",
+						"password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Admin (Login)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "19926d9b-31f6-4d1e-8fef-178f1b340064",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Base ",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"admin\",\n\t\"password\": \"admin\",\n\t\"scope\": \"profile\"\n}"
+				},
+				"url": {
+					"raw": "http://{{host}}:{{port}}/oauth2/user?username={{adminUsername}}&password={{adminPassword}}",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"oauth2",
+						"user"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "{{adminUsername}}"
+						},
+						{
+							"key": "password",
+							"value": "{{adminPassword}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User (Login) Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "19926d9b-31f6-4d1e-8fef-178f1b340064",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Base ",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"admin\",\n\t\"password\": \"admin\",\n\t\"scope\": \"profile\"\n}"
+				},
+				"url": {
+					"raw": "http://{{host}}:{{port}}/oauth2/user?username={{username}}&password={{password}}",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"oauth2",
+						"user"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "{{username}}"
+						},
+						{
+							"key": "password",
+							"value": "{{password}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Client",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "47efcdcc-3500-4082-8f5e-5f64aa1a74b6",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://{{host}}:{{port}}/oauth2/client",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"oauth2",
+						"client"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Token Admin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a9ba3568-7e7d-45d0-9ce6-ceed76f43d7a",
+						"exec": [
+							"const response = JSON.parse(responseBody);",
+							"pm.environment.set(\"accessToken\", response.data.accessToken);",
+							"pm.environment.set(\"refreshToken\", response.data.refreshToken);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic {{basic}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "{{adminUsername}}",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "{{adminPassword}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{host}}:{{port}}/oauth2/token",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"oauth2",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a9ba3568-7e7d-45d0-9ce6-ceed76f43d7a",
+						"exec": [
+							"const response = JSON.parse(responseBody);",
+							"pm.environment.set(\"accessToken\", response.data.accessToken);",
+							"pm.environment.set(\"refreshToken\", response.data.refreshToken);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic {{basic}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "{{username}}",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "{{password}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{host}}:{{port}}/oauth2/token",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"oauth2",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Refresh Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "62097aa3-7717-4177-8bac-08bdc19d5382",
+						"exec": [
+							"const response = JSON.parse(responseBody);",
+							"pm.environment.set(\"accessToken\", response.data.accessToken);",
+							"pm.environment.set(\"refreshToken\", response.data.refreshToken);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic {{basic}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "refresh_token",
+							"type": "text"
+						},
+						{
+							"key": "refresh_token",
+							"value": "{{refreshToken}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{host}}:{{port}}/oauth2/token?",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"oauth2",
+						"token"
+					],
+					"query": [
+						{
+							"key": "refresh_token",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SecureData Get",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://{{host}}:{{port}}/api/secure",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"secure"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

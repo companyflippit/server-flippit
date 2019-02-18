@@ -1,0 +1,10 @@
+BASE_URL=http://localhost:3000
+DB_URL=mongodb://localhost/basic-server-flippit
+GMAIL_EMAIL=
+GMAIL_PASSWORD=
+OAUTH_ADMIN_EMAIL=
+OAUTH_ADMIN_PASSWORD=
+OAUTH_ADMIN_USERNAME=admin
+OAUTH_DB_URL=mongodb://localhost/basic-oauth-flippit
+OAUTH_JWT_EXPIRATION=10h
+OAUTH_JWT_SECRET=asdfasdf12312asdf98234asdf
